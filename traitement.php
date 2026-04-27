@@ -1,5 +1,5 @@
 <?php
-require 'config/db.php';
+require 'config.php';
 
 if(isset($_POST['nom'], $_POST['prenom'], $_POST['filiere'])){
 
@@ -13,6 +13,6 @@ if(isset($_POST['nom'], $_POST['prenom'], $_POST['filiere'])){
         $_POST['filiere']
     ]);
 
-    header("Location: index.php");
+    echo "success";
 }
 ?>
