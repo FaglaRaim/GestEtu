@@ -1,99 +1,171 @@
-body {
-    font-family: Arial, sans-serif;
-    background: #f4f6f9;
+/*RESET */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
+/* BODY */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f4f6f9;
+    color: #333;
+}
+
+/* CONTAINER */
 .container {
-    width: 80%;
-    margin: auto;
-    margin-top: 30px;
+    width: 85%;
+    margin: 40px auto;
 }
 
 /* TITRES */
-h2 {
+h1 {
     text-align: center;
-    color: #333;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+h2 {
+    margin: 20px 0;
+    color: #34495e;
 }
 
 /* FORMULAIRE */
 form {
-    background: white;
+    background: #ffffff;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    margin-bottom: 30px;
 }
 
 input, select {
-    width: 90%;
+    width: 100%;
     padding: 10px;
-    margin: 10px;
-    border-radius: 5px;
+    margin: 10px 0;
+    border-radius: 6px;
     border: 1px solid #ccc;
+    font-size: 14px;
+    transition: 0.3s;
 }
 
+input:focus, select:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 5px rgba(52,152,219,0.3);
+}
+
+/* BOUTON */
 button {
-    padding: 10px 20px;
-    background: #007BFF;
+    width: 100%;
+    padding: 12px;
+    background: #3498db;
     border: none;
     color: white;
-    border-radius: 5px;
+    border-radius: 6px;
+    font-size: 15px;
     cursor: pointer;
+    transition: 0.3s;
 }
 
 button:hover {
-    background: #0056b3;
+    background: #2980b9;
 }
 
 /* TABLE */
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
-    background: white;
+    background: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 }
 
 th {
-    background: #007BFF;
+    background: #3498db;
     color: white;
-}
-
-th, td {
     padding: 12px;
-    border: 1px solid #ddd;
-    text-align: center;
 }
 
-tr:nth-child(even) {
+td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}
+
+tr:hover {
     background: #f9f9f9;
 }
 
-/* LIENS */
+/* BOUTONS ACTIONS */
 a {
     text-decoration: none;
-    padding: 5px 10px;
+    padding: 6px 10px;
     border-radius: 5px;
+    color: white;
+    font-size: 13px;
+    transition: 0.3s;
+}
+
+/* Modifier (bleu nuit) */
+.btn-update {
+    background: #2c3e50;
+}
+
+/* Supprimer (rouge) */
+.btn-delete {
+    background: #e74c3c;
 }
 
 a:hover {
-    opacity: 0.8;
+    opacity: 0.85;
 }
 
-a[href*="update"] {
-    background: orange;
-    color: white;
+/* MESSAGE ERREUR / SUCCESS */
+#error {
+    color: #e74c3c;
+    margin-top: 10px;
+    font-size: 14px;
 }
 
-a[href*="delete"] {
-    background: red;
-    color: white;
+#success {
+    color: #27ae60;
+    margin-top: 10px;
+    font-weight: bold;
 }
 
+/* RECHERCHE */
+#search {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+/* BOUTON RETOUR */
 .btn-retour {
     display: inline-block;
     margin-top: 15px;
-    background: #555;
+    background: #7f8c8d;
+    padding: 8px 12px;
+    border-radius: 5px;
     color: white;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+    }
+
+    table {
+        font-size: 12px;
+    }
+
+    button {
+        font-size: 14px;
+    }
 }
