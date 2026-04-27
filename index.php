@@ -1,10 +1,8 @@
-<?php require 'config/db.php'; ?>
+<?php require 'config.php'; ?>
 
 <?php
-// Récupérer les filières
 $filieres = $pdo->query("SELECT * FROM filieres")->fetchAll();
 
-// Récupérer les étudiants + filière
 $etudiants = $pdo->query("
     SELECT e.*, f.nom as filiere
     FROM etudiants e
@@ -23,60 +21,61 @@ $etudiants = $pdo->query("
 
 <div class="container">
 
-    <h2>Ajouter un étudiant</h2>
+<h1>🎓 Gestion des Étudiants</h1>
 
-    <form action="traitement.php" method="POST" id="form">
-        <input type="text" name="nom" placeholder="Nom">
-        <input type="text" name="prenom" placeholder="Prénom">
+<h2>Ajouter un étudiant</h2>
 
-        <select name="filiere">
-            <option value="">-- Choisir une filière --</option>
-            <?php foreach($filieres as $f): ?>
-                <option value="<?= $f['id'] ?>">
-                    <?= htmlspecialchars($f['nom']) ?>
-                </option>
-            <?php endforeach; ?>
-        </select>
+<form id="form">
+    <input type="text" name="nom" placeholder="Nom">
+    <input type="text" name="prenom" placeholder="Prénom">
 
-        <button type="submit">Ajouter</button>
-    </form>
+    <select name="filiere">
+        <option value="">-- Choisir une filière --</option>
+        <?php foreach($filieres as $f): ?>
+            <option value="<?= $f['id'] ?>">
+                <?= htmlspecialchars($f['nom']) ?>
+            </option>
+        <?php endforeach; ?>
+    </select>
 
-    <h2>Liste des étudiants</h2>
+    <button type="submit">Ajouter</button>
 
-    <table>
-        <tr>
-            <th>Nom</th>
-            <th>Prénom</th>
-            <th>Filière</th>
-            <th>Actions</th>
-        </tr>
+    <p id="error"></p>
+    <p id="success"></p>
+</form>
 
-        <?php if(count($etudiants) > 0): ?>
-            <?php foreach($etudiants as $e): ?>
-            <tr>
-                <td><?= htmlspecialchars($e['nom']) ?></td>
-                <td><?= htmlspecialchars($e['prenom']) ?></td>
-                <td><?= htmlspecialchars($e['filiere']) ?></td>
-                <td>
-                    <a href="update.php?id=<?= $e['id'] ?>">Modifier</a>
-                    <a href="delete.php?id=<?= $e['id'] ?>" 
-                       onclick="return confirm('Supprimer cet étudiant ?')">
-                       Supprimer
-                    </a>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        <?php else: ?>
-            <tr>
-                <td colspan="4">Aucun étudiant trouvé</td>
-            </tr>
-        <?php endif; ?>
+<h2>Liste des étudiants</h2>
 
-    </table>
+<input type="text" id="search" placeholder="🔍 Rechercher un étudiant...">
+
+<table>
+<thead>
+<tr>
+    <th>Nom</th>
+    <th>Prénom</th>
+    <th>Filière</th>
+    <th>Actions</th>
+</tr>
+</thead>
+
+<tbody id="tableBody">
+<?php foreach($etudiants as $e): ?>
+<tr>
+    <td><?= htmlspecialchars($e['nom']) ?></td>
+    <td><?= htmlspecialchars($e['prenom']) ?></td>
+    <td><?= htmlspecialchars($e['filiere']) ?></td>
+    <td>
+        <a href="update.php?id=<?= $e['id'] ?>" class="btn-update">Modifier</a>
+        <a href="delete.php?id=<?= $e['id'] ?>" onclick="return confirm('Supprimer ?')" class="btn-delete">Supprimer</a>
+    </td>
+</tr>
+<?php endforeach; ?>
+</tbody>
+
+</table>
 
 </div>
 
-<!-- JS ici (important) -->
 <script src="assets/js/script.js"></script>
 
 </body>
