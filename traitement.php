@@ -1,18 +1,28 @@
 <?php
 require 'config.php';
 
-if(isset($_POST['nom'], $_POST['prenom'], $_POST['filiere'])){
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-    $sql = "INSERT INTO etudiants (nom, prenom, filiere_id)
-            VALUES (?, ?, ?)";
+$nom = trim($_POST['nom'] ?? '');
+$prenom = trim($_POST['prenom'] ?? '');
+$filiere = $_POST['filiere'] ?? '';
 
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([
-        $_POST['nom'],
-        $_POST['prenom'],
-        $_POST['filiere']
-    ]);
-
-    echo "success";
+if ($nom === '' || $prenom === '' || $filiere === '') {
+echo "error";
+exit;
 }
-?>
+
+// doublon
+$check = $pdo->prepare("SELECT id FROM etudiants WHERE nom=? AND prenom=? AND filiere_id=?");
+$check->execute([$nom,$prenom,$filiere]);
+
+if ($check->rowCount() > 0) {
+echo "exists";
+exit;
+}
+
+$stmt = $pdo->prepare("INSERT INTO etudiants(nom,prenom,filiere_id) VALUES(?,?,?)");
+$stmt->execute([$nom,$prenom,$filiere]);
+
+echo "success";
+}
