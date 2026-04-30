@@ -1,4 +1,4 @@
-<?php require 'config/db.php'; ?>
+<?php require 'config.php'; ?>
 
 <?php
 // Récupérer les filières

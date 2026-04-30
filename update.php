@@ -1,5 +1,5 @@
 <?php
-require 'config/db.php';
+require 'config.php';
 
 // Vérifier si id existe
 if (!isset($_GET['id'])) {
